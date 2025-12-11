@@ -25,6 +25,8 @@ module Pwgen
     private def parse_args
       parser = OptionParser.new
       parser.banner = "Usage: pwgen [ OPTIONS ] [ pw_length ] [ num_pw ]"
+      parser.summary_indent = "  "
+      parser.summary_width = 25
 
       parser.on("-c", "--capitalize", "Include at least one capital letter") do
         @options.flags |= Feature::Uppers
@@ -55,7 +57,7 @@ module Pwgen
         @options.generator = GeneratorKind::Random
       end
 
-      parser.on("-r CHARS", "--remove-chars=CHARS", "Remove given characters") do |chars|
+      parser.on("-r", "--remove-chars CHARS", "Remove given characters") do |chars|
         @options.remove_chars = chars
         @options.generator = GeneratorKind::Random
       end
@@ -72,11 +74,11 @@ module Pwgen
         @options.columns = false
       end
 
-      parser.on("-N NUM", "--num-passwords=NUM", "Number of passwords to generate") do |num|
+      parser.on("-N", "--num-passwords NUM", "Number of passwords to generate") do |num|
         @options.count = parse_positive_int(num, "number of passwords")
       end
 
-      parser.on("-H SPEC", "--sha1=FILE[#seed]", "Use sha1 hash of given file") do |spec|
+      parser.on("-H", "--sha1 FILE[#seed]", "Use sha1 hash of given file") do |spec|
         @options.sha1_source = Sha1Source.new(spec)
       end
 
@@ -85,7 +87,9 @@ module Pwgen
         exit
       end
 
-      parser.on("-a", "--alt-phonics", "Compatibility option (no effect)") do
+      parser.on("-V", "--version", "Print version") do
+        puts "pwgen #{Pwgen::VERSION}"
+        exit
       end
 
       parser.parse(@args)

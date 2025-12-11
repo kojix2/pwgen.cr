@@ -26,5 +26,5 @@ require "./pwgen/cli"
 # password = generator.generate(16, Pwgen::Feature::Digits | Pwgen::Feature::Uppers | Pwgen::Feature::Symbols, nil)
 # ```
 module Pwgen
-  VERSION = "0.1.0"
+  VERSION = {{ `shards version #{__DIR__}`.chomp.stringify }}
 end
