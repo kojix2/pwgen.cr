@@ -3,7 +3,7 @@ module Pwgen
   enum ElementFlag : UInt32
     Consonant = 0x0001
     Vowel     = 0x0002
-    Dipthong  = 0x0004
+    Diphthong = 0x0004
     NotFirst  = 0x0008
   end
 
@@ -18,46 +18,46 @@ module Pwgen
   # Generates pronounceable passwords using phonetic rules.
   #
   # This generator creates passwords by combining phonetic elements
-  # (consonants, vowels, and dipthongs) according to pronunciation rules,
+  # (consonants, vowels, and diphthongs) according to pronunciation rules,
   # making them easier to remember and type.
   class PhonemeGenerator < Generator
     # Phonetic elements used for password generation.
     # Each element has a text representation and flags indicating its type.
     ELEMENTS = [
       Element.new("a", ElementFlag::Vowel),
-      Element.new("ae", ElementFlag::Vowel | ElementFlag::Dipthong),
-      Element.new("ah", ElementFlag::Vowel | ElementFlag::Dipthong),
-      Element.new("ai", ElementFlag::Vowel | ElementFlag::Dipthong),
+      Element.new("ae", ElementFlag::Vowel | ElementFlag::Diphthong),
+      Element.new("ah", ElementFlag::Vowel | ElementFlag::Diphthong),
+      Element.new("ai", ElementFlag::Vowel | ElementFlag::Diphthong),
       Element.new("b", ElementFlag::Consonant),
       Element.new("c", ElementFlag::Consonant),
-      Element.new("ch", ElementFlag::Consonant | ElementFlag::Dipthong),
+      Element.new("ch", ElementFlag::Consonant | ElementFlag::Diphthong),
       Element.new("d", ElementFlag::Consonant),
       Element.new("e", ElementFlag::Vowel),
-      Element.new("ee", ElementFlag::Vowel | ElementFlag::Dipthong),
-      Element.new("ei", ElementFlag::Vowel | ElementFlag::Dipthong),
+      Element.new("ee", ElementFlag::Vowel | ElementFlag::Diphthong),
+      Element.new("ei", ElementFlag::Vowel | ElementFlag::Diphthong),
       Element.new("f", ElementFlag::Consonant),
       Element.new("g", ElementFlag::Consonant),
-      Element.new("gh", ElementFlag::Consonant | ElementFlag::Dipthong | ElementFlag::NotFirst),
+      Element.new("gh", ElementFlag::Consonant | ElementFlag::Diphthong | ElementFlag::NotFirst),
       Element.new("h", ElementFlag::Consonant),
       Element.new("i", ElementFlag::Vowel),
-      Element.new("ie", ElementFlag::Vowel | ElementFlag::Dipthong),
+      Element.new("ie", ElementFlag::Vowel | ElementFlag::Diphthong),
       Element.new("j", ElementFlag::Consonant),
       Element.new("k", ElementFlag::Consonant),
       Element.new("l", ElementFlag::Consonant),
       Element.new("m", ElementFlag::Consonant),
       Element.new("n", ElementFlag::Consonant),
-      Element.new("ng", ElementFlag::Consonant | ElementFlag::Dipthong | ElementFlag::NotFirst),
+      Element.new("ng", ElementFlag::Consonant | ElementFlag::Diphthong | ElementFlag::NotFirst),
       Element.new("o", ElementFlag::Vowel),
-      Element.new("oh", ElementFlag::Vowel | ElementFlag::Dipthong),
-      Element.new("oo", ElementFlag::Vowel | ElementFlag::Dipthong),
+      Element.new("oh", ElementFlag::Vowel | ElementFlag::Diphthong),
+      Element.new("oo", ElementFlag::Vowel | ElementFlag::Diphthong),
       Element.new("p", ElementFlag::Consonant),
-      Element.new("ph", ElementFlag::Consonant | ElementFlag::Dipthong),
-      Element.new("qu", ElementFlag::Consonant | ElementFlag::Dipthong),
+      Element.new("ph", ElementFlag::Consonant | ElementFlag::Diphthong),
+      Element.new("qu", ElementFlag::Consonant | ElementFlag::Diphthong),
       Element.new("r", ElementFlag::Consonant),
       Element.new("s", ElementFlag::Consonant),
-      Element.new("sh", ElementFlag::Consonant | ElementFlag::Dipthong),
+      Element.new("sh", ElementFlag::Consonant | ElementFlag::Diphthong),
       Element.new("t", ElementFlag::Consonant),
-      Element.new("th", ElementFlag::Consonant | ElementFlag::Dipthong),
+      Element.new("th", ElementFlag::Consonant | ElementFlag::Diphthong),
       Element.new("u", ElementFlag::Vowel),
       Element.new("v", ElementFlag::Consonant),
       Element.new("w", ElementFlag::Consonant),
@@ -94,7 +94,7 @@ module Pwgen
         element = ELEMENTS[Pwgen.next_number(ELEMENTS.size)]
         next unless element.flags.includes?(should_be)
         next if first && element.flags.includes?(ElementFlag::NotFirst)
-        if prev.includes?(ElementFlag::Vowel) && element.flags.includes?(ElementFlag::Vowel) && element.flags.includes?(ElementFlag::Dipthong)
+        if prev.includes?(ElementFlag::Vowel) && element.flags.includes?(ElementFlag::Vowel) && element.flags.includes?(ElementFlag::Diphthong)
           next
         end
         if element.text.size > (length - chars.size)
@@ -148,7 +148,7 @@ module Pwgen
       if current == ElementFlag::Consonant
         ElementFlag::Vowel
       else
-        if prev.includes?(ElementFlag::Vowel) || latest.includes?(ElementFlag::Dipthong) || Pwgen.next_number(10) > 3
+        if prev.includes?(ElementFlag::Vowel) || latest.includes?(ElementFlag::Diphthong) || Pwgen.next_number(10) > 3
           ElementFlag::Consonant
         else
           ElementFlag::Vowel
