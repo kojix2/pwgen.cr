@@ -13,7 +13,7 @@ module Pwgen
     @@number_source = nil
   end
 
-  def self.with_number_source(proc : NumberProc, &block)
+  def self.with_number_source(proc : NumberProc, &)
     previous = current_number_source
     @@number_source = proc
     yield

@@ -31,7 +31,7 @@ module Pwgen
     end
 
     private def parse_spec(spec : String) : {String, String}
-      if (idx = spec.index('#'))
+      if idx = spec.index('#')
         {spec[0, idx], spec[idx + 1, spec.size - idx - 1]}
       else
         {spec, DEFAULT_SEED}

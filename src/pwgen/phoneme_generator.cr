@@ -133,7 +133,7 @@ module Pwgen
       end
 
       needs = Feature::Digits | Feature::Uppers | Feature::Symbols
-      return nil unless (feature_flags & needs) == Feature::None
+      return unless (feature_flags & needs) == Feature::None
 
       String.build do |io|
         chars.each { |ch| io << ch }
