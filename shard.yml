@@ -1,0 +1,13 @@
+name: pwgen
+version: 0.1.0
+
+authors:
+  - kojix2 <2xijok@gmail.com>
+
+targets:
+  pwgen:
+    main: src/main.cr
+
+crystal: '>= 1.18.2'
+
+license: MIT
