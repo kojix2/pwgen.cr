@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.17.1">
+<meta name="crystal_docs.project_version" content="main">
+<meta name="crystal_docs.project_name" content="pwgen">
+
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+  <meta name="repository-name" content="pwgen">
+  <title>Pwgen - pwgen main</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="index.html">
+          pwgen
+        </a>
+      </h1>
+
+      <span class="project-version">
+        main
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="pwgen/Pwgen" data-name="pwgen">
+      <a href="Pwgen.html">Pwgen</a>
+      
+        <ul>
+  
+  <li class=" " data-id="pwgen/Pwgen/CLI" data-name="pwgen::cli">
+      <a href="Pwgen/CLI.html">CLI</a>
+      
+    </li>
+  
+  <li class=" " data-id="pwgen/Pwgen/Element" data-name="pwgen::element">
+      <a href="Pwgen/Element.html">Element</a>
+      
+    </li>
+  
+  <li class=" " data-id="pwgen/Pwgen/ElementFlag" data-name="pwgen::elementflag">
+      <a href="Pwgen/ElementFlag.html">ElementFlag</a>
+      
+    </li>
+  
+  <li class=" " data-id="pwgen/Pwgen/Error" data-name="pwgen::error">
+      <a href="Pwgen/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="pwgen/Pwgen/Feature" data-name="pwgen::feature">
+      <a href="Pwgen/Feature.html">Feature</a>
+      
+    </li>
+  
+  <li class=" " data-id="pwgen/Pwgen/Generator" data-name="pwgen::generator">
+      <a href="Pwgen/Generator.html">Generator</a>
+      
+    </li>
+  
+  <li class=" " data-id="pwgen/Pwgen/GeneratorKind" data-name="pwgen::generatorkind">
+      <a href="Pwgen/GeneratorKind.html">GeneratorKind</a>
+      
+    </li>
+  
+  <li class=" " data-id="pwgen/Pwgen/NumberProc" data-name="pwgen::numberproc">
+      <a href="Pwgen/NumberProc.html">NumberProc</a>
+      
+    </li>
+  
+  <li class=" " data-id="pwgen/Pwgen/Options" data-name="pwgen::options">
+      <a href="Pwgen/Options.html">Options</a>
+      
+    </li>
+  
+  <li class=" " data-id="pwgen/Pwgen/PhonemeGenerator" data-name="pwgen::phonemegenerator">
+      <a href="Pwgen/PhonemeGenerator.html">PhonemeGenerator</a>
+      
+    </li>
+  
+  <li class=" " data-id="pwgen/Pwgen/RandomGenerator" data-name="pwgen::randomgenerator">
+      <a href="Pwgen/RandomGenerator.html">RandomGenerator</a>
+      
+    </li>
+  
+  <li class=" " data-id="pwgen/Pwgen/Sha1Source" data-name="pwgen::sha1source">
+      <a href="Pwgen/Sha1Source.html">Sha1Source</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">
+    module
+  </span> Pwgen
+
+</h1>
+
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Pwgen is a secure password generator library and CLI tool.</p>
+<p>It provides two password generation strategies:</p>
+<ul>
+<li>Phoneme-based: Generates pronounceable passwords using phonetic rules</li>
+<li>Random: Generates cryptographically secure random passwords</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-crystal"><span class="c"># Generate a pronounceable password</span>
+generator <span class="o">=</span> <span class="t">Pwgen</span><span class="t">::</span><span class="t">PhonemeGenerator</span>.new
+password <span class="o">=</span> generator.generate(<span class="n">12</span>, <span class="t">Pwgen</span><span class="t">::</span><span class="t">Feature</span><span class="t">::</span><span class="t">Digits</span> <span class="o">|</span> <span class="t">Pwgen</span><span class="t">::</span><span class="t">Feature</span><span class="t">::</span><span class="t">Uppers</span>, <span class="n">nil</span>)
+
+<span class="c"># Generate a random password</span>
+generator <span class="o">=</span> <span class="t">Pwgen</span><span class="t">::</span><span class="t">RandomGenerator</span>.new
+password <span class="o">=</span> generator.generate(<span class="n">16</span>, <span class="t">Pwgen</span><span class="t">::</span><span class="t">Feature</span><span class="t">::</span><span class="t">Digits</span> <span class="o">|</span> <span class="t">Pwgen</span><span class="t">::</span><span class="t">Feature</span><span class="t">::</span><span class="t">Uppers</span> <span class="o">|</span> <span class="t">Pwgen</span><span class="t">::</span><span class="t">Feature</span><span class="t">::</span><span class="t">Symbols</span>, <span class="n">nil</span>)</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen.cr#L28" target="_blank">
+        pwgen.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/cli.cr#L1" target="_blank">
+        pwgen/cli.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/constants.cr#L1" target="_blank">
+        pwgen/constants.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/generator.cr#L3" target="_blank">
+        pwgen/generator.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/options.cr#L1" target="_blank">
+        pwgen/options.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/phoneme_generator.cr#L1" target="_blank">
+        pwgen/phoneme_generator.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/random_generator.cr#L1" target="_blank">
+        pwgen/random_generator.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/random_source.cr#L3" target="_blank">
+        pwgen/random_source.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/sha1_source.cr#L3" target="_blank">
+        pwgen/sha1_source.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="AMBIGUOUS">
+        <strong>AMBIGUOUS</strong> = <code><span class="s">&quot;B8G6I1l0OQDS5Z2&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="DIGITS">
+        <strong>DIGITS</strong> = <code><span class="s">&quot;0123456789&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="LOWERS">
+        <strong>LOWERS</strong> = <code><span class="s">&quot;abcdefghijklmnopqrstuvwxyz&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="SYMBOLS">
+        <strong>SYMBOLS</strong> = <code><span class="s">&quot;!\&quot;#$%&amp;&#39;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="UPPERS">
+        <strong>UPPERS</strong> = <code><span class="s">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="VERSION">
+        <strong>VERSION</strong> = <code><span class="s">&quot;0.1.0&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="VOWELS">
+        <strong>VOWELS</strong> = <code><span class="s">&quot;01aeiouyAEIOUY&quot;</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  
+
+  
+  <h2>
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#ambiguous%3F%28char%3AChar%29%3ABool-class-method" class="signature"><strong>.ambiguous?</strong>(char : Char) : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#contains_any%3F%28text%3AString%2Ccharacters%3AString%29%3ABool-class-method" class="signature"><strong>.contains_any?</strong>(text : String, characters : String) : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#die%28message%3AString%2Ccode%3AInt32%3D1%29-class-method" class="signature"><strong>.die</strong>(message : String, code : Int32 = <span class="n">1</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#next_number%28max%3AInt32%29%3AInt32-class-method" class="signature"><strong>.next_number</strong>(max : Int32) : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#number_source%3D%28proc%3ANumberProc%29-class-method" class="signature"><strong>.number_source=</strong>(proc : NumberProc)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#reset_number_source-class-method" class="signature"><strong>.reset_number_source</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#vowel_char%3F%28char%3AChar%29%3ABool-class-method" class="signature"><strong>.vowel_char?</strong>(char : Char) : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#with_number_source%28proc%3ANumberProc%2C%26%29-class-method" class="signature"><strong>.with_number_source</strong>(proc : NumberProc, &)</a>
+        
+      </li>
+    
+  </ul>
+
+
+  
+
+  
+
+
+  <div class="methods-inherited">
+    
+  </div>
+
+  
+
+  
+  <h2>
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="ambiguous?(char:Char):Bool-class-method">
+      <div class="signature">
+        
+        def self.<strong>ambiguous?</strong>(char : Char) : Bool
+
+        <a class="method-permalink" href="#ambiguous%3F%28char%3AChar%29%3ABool-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/constants.cr#L31" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="contains_any?(text:String,characters:String):Bool-class-method">
+      <div class="signature">
+        
+        def self.<strong>contains_any?</strong>(text : String, characters : String) : Bool
+
+        <a class="method-permalink" href="#contains_any%3F%28text%3AString%2Ccharacters%3AString%29%3ABool-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/constants.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="die(message:String,code:Int32=1)-class-method">
+      <div class="signature">
+        
+        def self.<strong>die</strong>(message : String, code : Int32 = <span class="n">1</span>)
+
+        <a class="method-permalink" href="#die%28message%3AString%2Ccode%3AInt32%3D1%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/constants.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="next_number(max:Int32):Int32-class-method">
+      <div class="signature">
+        
+        def self.<strong>next_number</strong>(max : Int32) : Int32
+
+        <a class="method-permalink" href="#next_number%28max%3AInt32%29%3AInt32-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/random_source.cr#L24" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="number_source=(proc:NumberProc)-class-method">
+      <div class="signature">
+        
+        def self.<strong>number_source=</strong>(proc : <a href="Pwgen/NumberProc.html">NumberProc</a>)
+
+        <a class="method-permalink" href="#number_source%3D%28proc%3ANumberProc%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/random_source.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="reset_number_source-class-method">
+      <div class="signature">
+        
+        def self.<strong>reset_number_source</strong>
+
+        <a class="method-permalink" href="#reset_number_source-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/random_source.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="vowel_char?(char:Char):Bool-class-method">
+      <div class="signature">
+        
+        def self.<strong>vowel_char?</strong>(char : Char) : Bool
+
+        <a class="method-permalink" href="#vowel_char%3F%28char%3AChar%29%3ABool-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/constants.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_number_source(proc:NumberProc,&amp;)-class-method">
+      <div class="signature">
+        
+        def self.<strong>with_number_source</strong>(proc : <a href="Pwgen/NumberProc.html">NumberProc</a>, &)
+
+        <a class="method-permalink" href="#with_number_source%28proc%3ANumberProc%2C%26%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/pwgen.cr/blob/449d449c21947e6248b127b1418723eccbe52716/src/pwgen/random_source.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+  
+
+  
+
+
+</div>
+
+</body>
+</html>
