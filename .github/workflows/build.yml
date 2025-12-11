@@ -17,14 +17,10 @@ jobs:
         include:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-musl
-          - os: macos-13
-            target: x86_64-apple-darwin
           - os: macos-latest
             target: aarch64-apple-darwin
           - os: windows-latest
             target: x86_64-pc-windows-msvc
-          - os: windows-latest
-            target: x86_64-pc-windows-gnu
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -106,21 +102,23 @@ jobs:
         run: |
           shards install --without-development --release
           brew update
-          brew install libgc pcre2
+          brew install libgc pcre2 openssl@3
           echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
           unset PKG_CONFIG_PATH
           echo "cleared PKG_CONFIG_PATH to avoid openSSL conflicts"
           ln -s $(brew ls libgc | grep libgc.a) .
           ln -s $(brew ls pcre2 | grep libpcre2-8.a) .
-          STATIC_LIBS="-L $(pwd) $(pwd)/libgc.a $(pwd)/libpcre2-8.a"
+          ln -s $(brew --prefix openssl@3)/lib/libcrypto.a .
+          ln -s $(brew --prefix openssl@3)/lib/libssl.a . || true
+          STATIC_LIBS="-L $(pwd) $(pwd)/libgc.a $(pwd)/libpcre2-8.a $(pwd)/libcrypto.a $(pwd)/libssl.a"
           shards build --link-flags="$STATIC_LIBS" --release
           chmod +x bin/$BIN
           otool -L bin/$BIN
           if otool -L bin/$BIN | grep homebrew; then
-            echo "Error: Homebrew dependencies detected!"
+            echo "Error: Homebrew dynamic dependencies detected!"
             exit 1
           fi
-          echo "Static linking successful"
+          echo "macOS build completed with static Homebrew libs"
           file bin/$BIN
           bin/$BIN --help
           PKG=pwgen-${VERSION}-${{ matrix.target }}
@@ -143,21 +141,6 @@ jobs:
           Copy-Item "LICENSE" "$pkg/"
           Copy-Item "README.md" "$pkg/"
           Compress-Archive -Path "$pkg/*" -DestinationPath "$pkg.zip"
-
-      - name: Build on Windows (MinGW64)
-        if: matrix.target == 'x86_64-pc-windows-gnu'
-        shell: msys2 {0}
-        run: |
-          shards install --without-development --release
-          shards build --release --static
-          file bin/$BIN.exe
-          bin/$BIN --help
-          PKG=pwgen-${VERSION}-${{ matrix.target }}
-          mkdir -p $PKG
-          cp bin/$BIN.exe $PKG/
-          cp LICENSE $PKG/
-          cp README.md $PKG/
-          zip -r $PKG.zip $PKG
 
       - name: Upload artifacts (non-release)
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
