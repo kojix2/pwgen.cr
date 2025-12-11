@@ -26,20 +26,21 @@ pwgen 12 5
 
 Options:
 ```
--c, --capitalize              Include at least one capital letter
--A, --no-capitalize           Don't include capital letters
--n, --numerals                Include at least one number
--0, --no-numerals             Don't include numbers
--y, --symbols                 Include at least one special symbol
--B, --ambiguous               Don't include ambiguous characters
--v, --no-vowels               Don't include vowels
--r CHARS, --remove-chars      Remove specific characters
--s, --secure                  Generate random passwords
--C                            Print in columns
--1                            Print one per line
--N NUM, --num-passwords       Number of passwords
--H FILE[#seed], --sha1        Use SHA1 hash of file
--h, --help                    Show help
+  -c, --capitalize          Include at least one capital letter
+  -A, --no-capitalize       Don't include capital letters
+  -n, --numerals            Include at least one number
+  -0, --no-numerals         Don't include numbers
+  -y, --symbols             Include at least one special symbol
+  -B, --ambiguous           Don't include ambiguous characters
+  -v, --no-vowels           Don't include vowels
+  -r, --remove-chars CHARS  Remove given characters
+  -s, --secure              Generate completely random passwords
+  -C                        Print the generated passwords in columns
+  -1                        Don't print the generated passwords in columns
+  -N, --num-passwords NUM   Number of passwords to generate
+  -H, --sha1 FILE[#seed]    Use sha1 hash of given file
+  -h, --help                Print this help message
+  -V, --version             Print version
 ```
 
 ## Examples
