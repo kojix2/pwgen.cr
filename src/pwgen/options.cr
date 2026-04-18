@@ -16,6 +16,7 @@ module Pwgen
     property remove_chars : String?
     property sha1_source : Sha1Source?
     property term_width : Int32
+    property? color : Bool
 
     def columns : Bool
       @columns
@@ -32,9 +33,10 @@ module Pwgen
     def initialize
       @length = 8
       @count = nil
-      @flags = Feature::Digits | Feature::Uppers
+      @flags = Feature::Digits | Feature::Uppers | Feature::Symbols
       @generator = GeneratorKind::Phonemes
       @remove_chars = nil
+      @color = true
       @columns = STDOUT.tty?
       @sha1_source = nil
       @term_width = (ENV["COLUMNS"]?.try &.to_i?) || 80

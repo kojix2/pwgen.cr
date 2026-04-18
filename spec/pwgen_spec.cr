@@ -10,6 +10,48 @@ describe Pwgen::RandomGenerator do
   end
 end
 
+describe Pwgen::CLI do
+  it "colors uppercase letters, digits, and symbols" do
+    formatted = Pwgen::CLI.format_password("Aa0!", true)
+
+    formatted.should eq("\e[1;36mA\e[0ma\e[1;33m0\e[0m\e[1;31m!\e[0m")
+  end
+
+  it "returns plain text when color is disabled" do
+    Pwgen::CLI.format_password("Aa0!", false).should eq("Aa0!")
+  end
+
+  it "prints colored output by default" do
+    output = IO::Memory.new
+
+    Pwgen.with_number_source(sequential_proc) do
+      Pwgen::CLI.new(["-s", "-c", "1"], output).run
+    end
+
+    output.to_s.should eq("\e[1;36mA\e[0m\n")
+  end
+
+  it "disables colors with --no-color" do
+    output = IO::Memory.new
+
+    Pwgen.with_number_source(sequential_proc) do
+      Pwgen::CLI.new(["--no-color", "-s", "-c", "1"], output).run
+    end
+
+    output.to_s.should eq("A\n")
+  end
+
+  it "keeps column output layout intact" do
+    output = IO::Memory.new
+
+    Pwgen.with_number_source(sequential_proc) do
+      Pwgen::CLI.new(["--no-color", "-C", "-s", "-c", "1", "2"], output).run
+    end
+
+    output.to_s.should eq("A B\n")
+  end
+end
+
 describe Pwgen::PhonemeGenerator do
   it "produces pronounceable strings" do
     generator = Pwgen::PhonemeGenerator.new

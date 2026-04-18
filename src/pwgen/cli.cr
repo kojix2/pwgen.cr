@@ -4,7 +4,17 @@ module Pwgen
       new(args).run
     end
 
-    def initialize(args)
+    def self.format_password(password : String, color : Bool = true) : String
+      return password unless color
+
+      String.build do |io|
+        password.each_char do |character|
+          io << colorize_character(character)
+        end
+      end
+    end
+
+    def initialize(args, @output : IO = STDOUT)
       @args = args.dup
       @options = Options.new
     end
@@ -28,53 +38,57 @@ module Pwgen
       parser.summary_indent = "  "
       parser.summary_width = 25
 
-      parser.on("-c", "--capitalize", "Include at least one capital letter") do
-        @options.flags |= Feature::Uppers
-      end
+      # parser.on("-c", "--capitalize", "Include at least one capital letter") do
+      #   @options.flags |= Feature::Uppers
+      # end
 
-      parser.on("-A", "--no-capitalize", "Don't include capital letters") do
+      parser.on("-C", "--no-capitals", "Don't include capital letters") do
         @options.flags &= ~Feature::Uppers
       end
 
-      parser.on("-n", "--numerals", "Include at least one number") do
-        @options.flags |= Feature::Digits
-      end
+      # parser.on("-n", "--numerals", "Include at least one number") do
+      #   @options.flags |= Feature::Digits
+      # end
 
-      parser.on("-0", "--no-numerals", "Don't include numbers") do
+      parser.on("-N", "--no-numerals", "Don't include numbers") do
         @options.flags &= ~Feature::Digits
       end
 
-      parser.on("-y", "--symbols", "Include at least one special symbol") do
-        @options.flags |= Feature::Symbols
+      # parser.on("-s", "--symbols", "Include at least one special symbol") do
+      #   @options.flags |= Feature::Symbols
+      # end
+
+      parser.on("-S", "--no-symbols", "Don't include special symbols") do
+        @options.flags &= ~Feature::Symbols
       end
 
-      parser.on("-B", "--ambiguous", "Don't include ambiguous characters") do
+      parser.on("-A", "--no-ambiguous", "Don't include ambiguous characters") do
         @options.flags |= Feature::Ambiguous
       end
 
-      parser.on("-v", "--no-vowels", "Don't include vowels") do
+      parser.on("-V", "--no-vowels", "Don't include vowels") do
         @options.flags |= Feature::NoVowels
         @options.generator = GeneratorKind::Random
       end
 
-      parser.on("-r", "--remove-chars CHARS", "Remove given characters") do |chars|
+      parser.on("-E", "--exclude CHARS", "Remove given characters") do |chars|
         @options.remove_chars = chars
         @options.generator = GeneratorKind::Random
       end
 
-      parser.on("-s", "--secure", "Generate completely random passwords") do
+      parser.on("-r", "--random", "Generate completely random passwords") do
         @options.generator = GeneratorKind::Random
       end
 
-      parser.on("-C", "Print the generated passwords in columns") do
-        @options.columns = true
-      end
-
-      parser.on("-1", "Don't print the generated passwords in columns") do
+      parser.on("-1", "--one", "Single column") do
         @options.columns = false
       end
 
-      parser.on("-N", "--num-passwords NUM", "Number of passwords to generate") do |num|
+      parser.on("-m", "--no-color", "Disable ANSI color output") do
+        @options.color = false
+      end
+
+      parser.on("-n", "--num NUM", "Number of passwords to generate") do |num|
         @options.count = parse_positive_int(num, "number of passwords")
       end
 
@@ -87,8 +101,8 @@ module Pwgen
         exit
       end
 
-      parser.on("-V", "--version", "Print version") do
-        puts "pwgen #{Pwgen::VERSION}"
+      parser.on("-v", "--version", "Print version") do
+        puts "pwgen #{Pwgen::VERSION} (#{Pwgen::REPOURL})"
         exit
       end
 
@@ -156,19 +170,32 @@ module Pwgen
         columns = @options.column_count
         count.times do |idx|
           password = generator.generate(@options.length, @options.flags, @options.remove_chars)
+          rendered = render_password(password)
           if ((idx % columns) == (columns - 1)) || (idx == count - 1)
-            puts password
+            @output.puts rendered
           else
-            print password
-            print ' '
+            @output.print rendered
+            @output.print ' '
           end
         end
       else
         count.times do
           password = generator.generate(@options.length, @options.flags, @options.remove_chars)
-          puts password
+          @output.puts render_password(password)
         end
       end
+    end
+
+    private def render_password(password : String) : String
+      self.class.format_password(password, @options.color?)
+    end
+
+    private def self.colorize_character(character : Char) : String
+      text = character.to_s
+      return text.colorize.cyan.mode(:bold).to_s if DIGITS.includes?(character)
+      return text.colorize.bold.mode(:bold).to_s if UPPERS.includes?(character)
+      return text.colorize.red.mode(:bold).to_s if SYMBOLS.includes?(character)
+      text
     end
 
     private def parse_positive_int(value : String, label : String) : Int32
@@ -183,5 +210,6 @@ module Pwgen
 
     @args : Array(String)
     @options : Options
+    @output : IO
   end
 end

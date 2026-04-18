@@ -1,4 +1,5 @@
 require "option_parser"
+require "colorize"
 
 require "./pwgen/constants"
 require "./pwgen/random_source"
@@ -27,4 +28,5 @@ require "./pwgen/cli"
 # ```
 module Pwgen
   VERSION = {{ `shards version #{__DIR__}`.chomp.stringify }}
+  REPOURL = "https://github.com/kojix2/pwgen.cr"
 end
