@@ -38,25 +38,13 @@ module Pwgen
       parser.summary_indent = "  "
       parser.summary_width = 25
 
-      # parser.on("-c", "--capitalize", "Include at least one capital letter") do
-      #   @options.flags |= Feature::Uppers
-      # end
-
       parser.on("-C", "--no-capitals", "Don't include capital letters") do
         @options.flags &= ~Feature::Uppers
       end
 
-      # parser.on("-n", "--numerals", "Include at least one number") do
-      #   @options.flags |= Feature::Digits
-      # end
-
       parser.on("-N", "--no-numerals", "Don't include numbers") do
         @options.flags &= ~Feature::Digits
       end
-
-      # parser.on("-s", "--symbols", "Include at least one special symbol") do
-      #   @options.flags |= Feature::Symbols
-      # end
 
       parser.on("-S", "--no-symbols", "Don't include special symbols") do
         @options.flags &= ~Feature::Symbols
@@ -83,10 +71,6 @@ module Pwgen
       parser.on("-1", "--one", "Single column") do
         @options.columns = false
       end
-
-      # parser.on("-C", "--columns", "Arrange output in columns") do
-      #   @options.columns = true
-      # end
 
       parser.on("-m", "--no-color", "Disable ANSI color output") do
         @options.color = false

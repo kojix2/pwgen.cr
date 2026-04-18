@@ -27,11 +27,14 @@ describe Pwgen::CLI do
 
   it "prints colored output by default" do
     output = IO::Memory.new
+    previous = Colorize.enabled?
 
+    Colorize.enabled = true
     Pwgen::CLI.new(["8", "1"], output).run
+    Colorize.enabled = previous
 
     rendered = output.to_s
-    rendered.size.should be > 0
+    rendered.includes?("\e[").should be_true
     rendered.ends_with?("\n").should be_true
   end
 

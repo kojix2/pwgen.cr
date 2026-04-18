@@ -69,7 +69,7 @@ module Pwgen
     def generate(length : Int32, flags : Feature, remove : String?) : String
       raise Error.new("Password length must be positive") if length <= 0
       if remove
-        raise Error.new("--remove-chars is only supported with random passwords")
+        raise Error.new("--exclude is only supported with random passwords")
       end
       enforcement_flags = length > 2 ? flags : Feature::None
 

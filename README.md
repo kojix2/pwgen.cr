@@ -56,7 +56,7 @@ pwgen -H /path/to/file#seed 12 5
 - Default: phoneme-based pronounceable passwords
 - Output is colorized by default: uppercase letters, digits, and symbols use ANSI colors
 - `--no-color`: disable ANSI color output when piping or saving plain text is preferred
-- `-s`: cryptographically secure random (Random::Secure)
+- `-r`: cryptographically secure random (Random::Secure)
 - `-H`: SHA1-based PRNG for reproducible output
 - Uses Crystal's `Random::Secure` backed by the OS CSPRNG
 
