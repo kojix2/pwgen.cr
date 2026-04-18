@@ -29,14 +29,14 @@ module Pwgen
     private def build_char_pool(flags : Feature) : Array(Char)
       pool = [] of Char
       if flags.includes?(Feature::Digits)
-        DIGITS.each_char { |ch| pool << ch }
+        DIGITS.each_char { |character| pool << character }
       end
       if flags.includes?(Feature::Uppers)
-        UPPERS.each_char { |ch| pool << ch }
+        UPPERS.each_char { |character| pool << character }
       end
-      LOWERS.each_char { |ch| pool << ch }
+      LOWERS.each_char { |character| pool << character }
       if flags.includes?(Feature::Symbols)
-        SYMBOLS.each_char { |ch| pool << ch }
+        SYMBOLS.each_char { |character| pool << character }
       end
       pool
     end
@@ -44,19 +44,19 @@ module Pwgen
     private def apply_removals(pool : Array(Char), remove : String?)
       return unless remove
       remove.each_char do |target|
-        pool.reject! { |ch| ch == target }
+        pool.reject! { |character| character == target }
       end
     end
 
     private def ensure_valid_pool(pool : Array(Char), flags : Feature)
       raise Error.new("Error: No characters left in the valid set") if pool.empty?
-      if flags.includes?(Feature::Digits) && !pool.any? { |ch| DIGITS.includes?(ch) }
+      if flags.includes?(Feature::Digits) && !pool.any? { |character| DIGITS.includes?(character) }
         raise Error.new("Error: No digits left in the valid set")
       end
-      if flags.includes?(Feature::Uppers) && !pool.any? { |ch| UPPERS.includes?(ch) }
+      if flags.includes?(Feature::Uppers) && !pool.any? { |character| UPPERS.includes?(character) }
         raise Error.new("Error: No upper case letters left in the valid set")
       end
-      if flags.includes?(Feature::Symbols) && !pool.any? { |ch| SYMBOLS.includes?(ch) }
+      if flags.includes?(Feature::Symbols) && !pool.any? { |character| SYMBOLS.includes?(character) }
         raise Error.new("Error: No symbols left in the valid set")
       end
     end
@@ -74,7 +74,7 @@ module Pwgen
         builder << ch
       end
       String.build do |io|
-        builder.each { |ch| io << ch }
+        builder.each { |character| io << character }
       end
     end
 

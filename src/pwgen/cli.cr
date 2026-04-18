@@ -144,7 +144,7 @@ module Pwgen
       if count = @options.count
         return count
       end
-      if @options.columns
+      if @options.columns?
         @options.column_count * 20
       else
         1
@@ -152,7 +152,7 @@ module Pwgen
     end
 
     private def emit_passwords(generator : Generator, count : Int32)
-      if @options.columns
+      if @options.columns?
         columns = @options.column_count
         count.times do |idx|
           password = generator.generate(@options.length, @options.flags, @options.remove_chars)

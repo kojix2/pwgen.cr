@@ -14,9 +14,20 @@ module Pwgen
     property flags : Feature
     property generator : GeneratorKind
     property remove_chars : String?
-    property columns : Bool
     property sha1_source : Sha1Source?
     property term_width : Int32
+
+    def columns : Bool
+      @columns
+    end
+
+    def columns? : Bool
+      @columns
+    end
+
+    def columns=(value : Bool)
+      @columns = value
+    end
 
     def initialize
       @length = 8

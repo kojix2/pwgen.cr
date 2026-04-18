@@ -25,7 +25,7 @@ module Pwgen
   end
 
   def self.contains_any?(text : String, characters : String) : Bool
-    text.each_char.any? { |ch| characters.includes?(ch) }
+    text.each_char.any? { |character| characters.includes?(character) }
   end
 
   def self.ambiguous?(char : Char) : Bool

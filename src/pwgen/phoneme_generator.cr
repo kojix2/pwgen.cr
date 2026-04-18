@@ -92,23 +92,13 @@ module Pwgen
 
       while chars.size < length
         element = ELEMENTS[Pwgen.next_number(ELEMENTS.size)]
-        next unless element.flags.includes?(should_be)
-        next if first && element.flags.includes?(ElementFlag::NotFirst)
-        if prev.includes?(ElementFlag::Vowel) && element.flags.includes?(ElementFlag::Vowel) && element.flags.includes?(ElementFlag::Diphthong)
-          next
-        end
-        if element.text.size > (length - chars.size)
-          next
-        end
+        next unless valid_next_element?(element, should_be, prev, first, length - chars.size)
 
         start_index = chars.size
-        element.text.each_char { |ch| chars << ch }
+        append_element_text!(chars, element)
 
-        if flags.includes?(Feature::Uppers)
-          if (first || element.flags.includes?(ElementFlag::Consonant)) && Pwgen.next_number(10) < 2
-            chars[start_index] = chars[start_index].upcase
-            feature_flags &= ~Feature::Uppers
-          end
+        if apply_uppercase?(chars, flags, element, start_index, first)
+          feature_flags &= ~Feature::Uppers
         end
 
         break if chars.size >= length
@@ -135,8 +125,34 @@ module Pwgen
       needs = Feature::Digits | Feature::Uppers | Feature::Symbols
       return unless (feature_flags & needs) == Feature::None
 
+      build_string(chars)
+    end
+
+    private def valid_next_element?(element : Element, should_be : ElementFlag, prev : ElementFlag, first : Bool, remaining : Int32) : Bool
+      return false unless element.flags.includes?(should_be)
+      return false if first && element.flags.includes?(ElementFlag::NotFirst)
+      return false if prev.includes?(ElementFlag::Vowel) && element.flags.includes?(ElementFlag::Vowel) && element.flags.includes?(ElementFlag::Diphthong)
+      return false if element.text.size > remaining
+      true
+    end
+
+    private def append_element_text!(chars : Array(Char), element : Element)
+      element.text.each_char { |character| chars << character }
+    end
+
+    private def apply_uppercase?(chars : Array(Char), flags : Feature, element : Element, start_index : Int32, first : Bool) : Bool
+      return false unless flags.includes?(Feature::Uppers)
+      if (first || element.flags.includes?(ElementFlag::Consonant)) && Pwgen.next_number(10) < 2
+        chars[start_index] = chars[start_index].upcase
+        true
+      else
+        false
+      end
+    end
+
+    private def build_string(chars : Array(Char)) : String
       String.build do |io|
-        chars.each { |ch| io << ch }
+        chars.each { |character| io << character }
       end
     end
 
