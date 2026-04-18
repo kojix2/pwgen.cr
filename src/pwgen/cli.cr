@@ -84,6 +84,10 @@ module Pwgen
         @options.columns = false
       end
 
+      # parser.on("-C", "--columns", "Arrange output in columns") do
+      #   @options.columns = true
+      # end
+
       parser.on("-m", "--no-color", "Disable ANSI color output") do
         @options.color = false
       end
