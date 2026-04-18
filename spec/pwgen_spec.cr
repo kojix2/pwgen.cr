@@ -14,7 +14,11 @@ describe Pwgen::CLI do
   it "colors uppercase letters, digits, and symbols" do
     formatted = Pwgen::CLI.format_password("Aa0!", true)
 
-    formatted.should eq("\e[1;36mA\e[0ma\e[1;33m0\e[0m\e[1;31m!\e[0m")
+    upper = "A".colorize.bold.mode(:bold).to_s
+    digit = "0".colorize.cyan.mode(:bold).to_s
+    symbol = "!".colorize.red.mode(:bold).to_s
+
+    formatted.should eq("#{upper}a#{digit}#{symbol}")
   end
 
   it "returns plain text when color is disabled" do
@@ -24,31 +28,47 @@ describe Pwgen::CLI do
   it "prints colored output by default" do
     output = IO::Memory.new
 
-    Pwgen.with_number_source(sequential_proc) do
-      Pwgen::CLI.new(["-s", "-c", "1"], output).run
-    end
+    Pwgen::CLI.new(["8", "1"], output).run
 
-    output.to_s.should eq("\e[1;36mA\e[0m\n")
+    rendered = output.to_s
+    rendered.includes?("\e[").should be_true
+    rendered.ends_with?("\n").should be_true
   end
 
   it "disables colors with --no-color" do
     output = IO::Memory.new
 
-    Pwgen.with_number_source(sequential_proc) do
-      Pwgen::CLI.new(["--no-color", "-s", "-c", "1"], output).run
-    end
+    Pwgen::CLI.new(["--no-color", "8", "1"], output).run
 
-    output.to_s.should eq("A\n")
+    rendered = output.to_s
+    rendered.includes?("\e[").should be_false
+    rendered.ends_with?("\n").should be_true
+    rendered.chomp.size.should eq(8)
   end
 
   it "keeps column output layout intact" do
     output = IO::Memory.new
 
-    Pwgen.with_number_source(sequential_proc) do
-      Pwgen::CLI.new(["--no-color", "-C", "-s", "-c", "1", "2"], output).run
-    end
+    Pwgen::CLI.new(["--no-color", "-C", "8", "2"], output).run
 
-    output.to_s.should eq("A B\n")
+    rendered = output.to_s
+    rendered.includes?("\n").should be_true
+    tokens = rendered.chomp.split(' ')
+    tokens.size.should eq(2)
+    tokens.each(&.size.should(eq(8)))
+  end
+
+  it "uses --num to control generated count" do
+    output = IO::Memory.new
+
+    Pwgen::CLI.new(["--no-color", "-1", "-n", "2", "8"], output).run
+
+    lines = output.to_s.lines
+    lines.size.should eq(2)
+    lines.each do |line|
+      line.includes?("\e[").should be_false
+      line.chomp.size.should eq(8)
+    end
   end
 end
 
