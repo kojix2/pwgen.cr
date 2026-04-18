@@ -157,32 +157,24 @@
 <p>Generate 5 passwords of 12 characters:</p>
 <pre><code class="language-bash">pwgen 12 5</code></pre>
 <p>Options:</p>
-<pre><code class="language-crystal">  -c, --capitalize          Include at least one capital letter
-  -A, --no-capitalize       Don&#39;t include capital letters
-  -n, --numerals            Include at least one number
-  -0, --no-numerals         Don&#39;t include numbers
-  -y, --symbols             Include at least one special symbol
-  -B, --ambiguous           Don&#39;t include ambiguous characters
-  -v, --no-vowels           Don&#39;t include vowels
-  -r, --remove-chars CHARS  Remove given characters
-  -s, --secure              Generate completely random passwords
-  -C                        Print the generated passwords in columns
-  -1                        Don&#39;t print the generated passwords in columns
-  -N, --num-passwords NUM   Number of passwords to generate
+<pre><code class="language-crystal">  -C, --no-capitals         Don&#39;t include capital letters
+  -N, --no-numerals         Don&#39;t include numbers
+  -S, --no-symbols          Don&#39;t include special symbols
+  -A, --no-ambiguous        Don&#39;t include ambiguous characters
+  -V, --no-vowels           Don&#39;t include vowels
+  -E, --exclude CHARS       Remove given characters
+  -r, --random              Generate completely random passwords
+  -1, --one                 Single column
+  -m, --no-color            Disable ANSI color output
+  -n, --num NUM             Number of passwords to generate
   -H, --sha1 FILE[#seed]    Use sha1 hash of given file
   -h, --help                Print this help message
-  -V, --version             Print version</code></pre>
+  -v, --version             Print version</code></pre>
 <h2><a id="examples" class="anchor" href="#examples">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>Examples</h2>
-<p>Random passwords:</p>
-<pre><code class="language-bash">pwgen -s 16 3</code></pre>
-<p>No ambiguous characters:</p>
-<pre><code class="language-bash">pwgen -B 12</code></pre>
-<p>Include symbols:</p>
-<pre><code class="language-bash">pwgen -y 14 3</code></pre>
 <p>Deterministic generation:</p>
 <pre><code class="language-bash">pwgen -H /path/to/file#seed 12 5</code></pre>
 <h2><a id="implementation" class="anchor" href="#implementation">
@@ -192,6 +184,8 @@
 </a>Implementation</h2>
 <ul>
 <li>Default: phoneme-based pronounceable passwords</li>
+<li>Output is colorized by default: uppercase letters, digits, and symbols use ANSI colors</li>
+<li><code>--no-color</code>: disable ANSI color output when piping or saving plain text is preferred</li>
 <li><code>-s</code>: cryptographically secure random (Random::Secure)</li>
 <li><code>-H</code>: SHA1-based PRNG for reproducible output</li>
 <li>Uses Crystal's <code>Random::Secure</code> backed by the OS CSPRNG</li>

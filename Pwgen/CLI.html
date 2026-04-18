@@ -173,7 +173,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/pwgen.cr/blob/e6f4cb35d5676bd33f06f42c22a37ea2085ae121/src/pwgen/cli.cr#L2" target="_blank">
+      <a href="https://github.com/kojix2/pwgen.cr/blob/e4972acbc5518c10f76b85e6fee10fa68a48737a/src/pwgen/cli.cr#L2" target="_blank">
         pwgen/cli.cr
       </a>
     
@@ -196,7 +196,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28args%29-class-method" class="signature"><strong>.new</strong>(args)</a>
+        <a href="#new%28args%2Coutput%3AIO%3DSTDOUT%29-class-method" class="signature"><strong>.new</strong>(args, output : IO = <span class="t">STDOUT</span>)</a>
         
       </li>
     
@@ -213,6 +213,11 @@
     Class Method Summary
   </h2>
   <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#format_password%28password%3AString%2Ccolor%3ABool%3Dtrue%29%3AString-class-method" class="signature"><strong>.format_password</strong>(password : String, color : Bool = <span class="n">true</span>) : String</a>
+        
+      </li>
     
       <li class="entry-summary">
         <a href="#run%28args%3DARGV%29-class-method" class="signature"><strong>.run</strong>(args = <span class="t">ARGV</span>)</a>
@@ -284,18 +289,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(args)-class-method">
+    <div class="entry-detail" id="new(args,output:IO=STDOUT)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(args)
+        def self.<strong>new</strong>(args, output : IO = <span class="t">STDOUT</span>)
 
-        <a class="method-permalink" href="#new%28args%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28args%2Coutput%3AIO%3DSTDOUT%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/pwgen.cr/blob/e6f4cb35d5676bd33f06f42c22a37ea2085ae121/src/pwgen/cli.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/pwgen.cr/blob/e4972acbc5518c10f76b85e6fee10fa68a48737a/src/pwgen/cli.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -312,6 +317,22 @@
     Class Method Detail
   </h2>
   
+    <div class="entry-detail" id="format_password(password:String,color:Bool=true):String-class-method">
+      <div class="signature">
+        
+        def self.<strong>format_password</strong>(password : String, color : Bool = <span class="n">true</span>) : String
+
+        <a class="method-permalink" href="#format_password%28password%3AString%2Ccolor%3ABool%3Dtrue%29%3AString-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/pwgen.cr/blob/e4972acbc5518c10f76b85e6fee10fa68a48737a/src/pwgen/cli.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="run(args=ARGV)-class-method">
       <div class="signature">
         
@@ -323,7 +344,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/pwgen.cr/blob/e6f4cb35d5676bd33f06f42c22a37ea2085ae121/src/pwgen/cli.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/pwgen.cr/blob/e4972acbc5518c10f76b85e6fee10fa68a48737a/src/pwgen/cli.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -353,7 +374,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/pwgen.cr/blob/e6f4cb35d5676bd33f06f42c22a37ea2085ae121/src/pwgen/cli.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/pwgen.cr/blob/e4972acbc5518c10f76b85e6fee10fa68a48737a/src/pwgen/cli.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
